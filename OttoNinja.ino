@@ -1,10 +1,11 @@
 #include <ESP8266WiFi.h>
+#include <WiFiClient.h>
 #include <Servo.h>
 #include <FS.h> // Required for LittleFS
 #include <LittleFS.h> // LittleFS support
 #include <ESP8266mDNS.h> // mDNS support
 
-#define	CONNECT_MODE WIFI_STA	// either WIFI_STA or WIFI_AP
+#define CONNECT_MODE 1 // 1 for station ... 2 for access point
 
 const char* ssid = "ssid"; // write your WiFi name
 const char* password = "password"; // write your WiFi password
@@ -332,7 +333,7 @@ void setup() {
   Serial.println();
   Serial.println();
 
-#if CONNECT_MODE == WIFI_STA
+#if (CONNECT_MODE == 1)
   Serial.print("Conectando a ");
   Serial.println(ssid);
   
@@ -349,7 +350,7 @@ void setup() {
   Serial.println("");
   Serial.println("WiFi conectado");
 
-#elif CONNECT_MODE == WIFI_AP
+#elif (CONNECT_MODE == 2)
   Serial.print("Conectando a ");
   Serial.println(ssid);
 
