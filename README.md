@@ -67,7 +67,7 @@ You can choose between two WiFi modes: Station (STA) mode and Access Point (AP) 
 To select the mode, change the `CONNECT_MODE` definition:
 
 ```cpp
-#define	CONNECT_MODE WIFI_STA	// either WIFI_STA or WIFI_AP
+#define CONNECT_MODE 2 // 1 for station ... 2 for access point
 ```
 
 ### WiFi Settings
