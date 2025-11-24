@@ -1,6 +1,6 @@
 # OttoNinja Web App Control
 
-This is the OttoNinja Web App Control Interface from [Otto Web App Control](https://github.com/OttoDIY/OttoWebAppControl]) ... This project allows you to control an OttoNinja robot using a web interface served directly from an ESP8266. The web interface provides a joystick and buttons for controlling the robot's movements and modes.
+This is the OttoNinja Web App Control Interface from [Otto Web App Control](https://github.com/OttoDIY/OttoWebAppControl) ... This project allows you to control an OttoNinja robot using a web interface served directly from an ESP8266. The web interface provides a joystick and buttons for controlling the robot's movements and modes.
 
 ## Features
 
