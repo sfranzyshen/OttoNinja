@@ -20,6 +20,31 @@ const uint8_t RightLegPin = D4; // D4 or 2
 const uint8_t LeftFootPin = D7; // D7 or 13
 const uint8_t RightFootPin = D3; // D3 or 0
 
+// Left Leg standing Position
+#define LA0 = 60    // 0 = Full Tilt Right   180 = Full Tilt Left   Default = 60 // was 60
+
+// Right Leg standing position
+#define RA0 = 120   // 0 = Full Tilt Right   180 = Full Tilt Left   Default = 120 // was 120
+
+// Left Leg tilt left walking position
+#define LATL = 100   // 0 = Full Tilt Right   180 = Full Tilt Left   Default BASIC = 85   Default HUMANOID = 80 // was 120
+
+// Right Leg tilt left walking position
+#define RATL = 175  // 0 = Full Tilt Right   180 = Full Tilt Left   Default BASIC = 175   Default HUMANOID = 150 // was 180
+
+// Left Leg tilt right walking position
+#define LATR = 5   // 0 = Full Tilt Right   180 = Full Tilt Left   Default BASIC = 5   Default HUMANOID = 30 // was 0
+
+// Right Leg tilt right walking position
+#define RATR = 80  // 0 = Full Tilt Right   180 = Full Tilt Left   Default BASIC = 95  Default HUMANOID = 100 // was 65
+
+// Left Leg roll Position
+#define LA1 = 180  // 0 = Full Tilt Right   180 = Full Tilt Left   Default = 170 // was 170
+
+// Right Leg roll position
+#define RA1 = 0    // 0 = Full Tilt Right   180 = Full Tilt Left   Default = 10 // was 10
+
+
 // Creamos una instancia del servidor
 // y especificamos el puerto a escuchar como un argumento.
 WiFiServer server(80);
@@ -36,9 +61,7 @@ int roll_left_forward_speed = 40;
 int roll_right_backward_speed = 40;
 int roll_left_backward_speed = 40;
 String command = "";
-int currentmillis1 = 0;
-int currentmillis2 = 0;
-int currentmillis3 = 0;
+
 
 long ultrasound_distance_1() {
    long duration, distance;
@@ -79,8 +102,8 @@ void Home() {
 
   LeftFoot.write(90);
   RightFoot.write(90);
-  LeftLeg.write(60);
-  RightLeg.write(120);
+  LeftLeg.write(LA0); 
+  RightLeg.write(RA0);
   delay(100);
   LeftLeg.detach();
   RightLeg.detach();
@@ -91,8 +114,8 @@ void SetWalk() {
   rollMode = false;
   LeftLeg.attach(LeftLegPin, 544, 2400);
   RightLeg.attach(RightLegPin, 544, 2400);
-  LeftLeg.write(60);
-  RightLeg.write(120);
+  LeftLeg.write(LA0);
+  RightLeg.write(RA0);
   delay(100);
   LeftLeg.detach();
   RightLeg.detach();
@@ -104,8 +127,8 @@ void SetRoll() {
   rollMode = true;
   LeftLeg.attach(LeftLegPin, 544, 2400);
   RightLeg.attach(RightLegPin, 544, 2400);
-  LeftLeg.write(170);
-  RightLeg.write(10);
+  LeftLeg.write(LA1);  // was 170
+  RightLeg.write(RA1); // was 10
   delay(100);
   LeftLeg.detach();
   RightLeg.detach();
@@ -115,8 +138,8 @@ void SetRoll() {
 void TiltToRight() {
   LeftLeg.attach(LeftLegPin, 544, 2400);
   RightLeg.attach(RightLegPin, 544, 2400);
-  LeftLeg.write(0);
-  RightLeg.write(65);
+  LeftLeg.write(LATR);  // was 0
+  RightLeg.write(RATR); // was 65
   delay(300);
   LeftLeg.detach();
   RightLeg.detach();
@@ -126,8 +149,8 @@ void TiltToRight() {
 void TiltToLeft() {
   LeftLeg.attach(LeftLegPin, 544, 2400);
   RightLeg.attach(RightLegPin, 544, 2400);
-  LeftLeg.write(120);
-  RightLeg.write(180);
+  LeftLeg.write(LATL);  // was 120
+  RightLeg.write(RATL); // was 180
   delay(300);
   LeftLeg.detach();
   RightLeg.detach();
