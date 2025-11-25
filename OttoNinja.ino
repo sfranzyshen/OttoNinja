@@ -17,10 +17,15 @@ IPAddress ap_ip(192,168,1,1);
 IPAddress ap_gateway(192,168,1,1);   
 IPAddress ap_subnet(255,255,255,0); 
 
+// Pins
 const uint8_t LeftLegPin = D8; // D8 or 15
 const uint8_t RightLegPin = D4; // D4 or 2
 const uint8_t LeftFootPin = D7; // D7 or 13
 const uint8_t RightFootPin = D3; // D3 or 0
+
+// Ultrasound options
+#define ECHO D6
+#define TRIG D5
 
 // Left Leg standing Position
 #define LA0 60    // 0 = Full Tilt Right   180 = Full Tilt Left   Default = 60 // was 60
@@ -46,7 +51,6 @@ const uint8_t RightFootPin = D3; // D3 or 0
 // Right Leg roll position
 #define RA1 0    // 0 = Full Tilt Right   180 = Full Tilt Left   Default = 10 // was 10
 
-
 // Creamos una instancia del servidor
 // y especificamos el puerto a escuchar como un argumento.
 WiFiServer server(80);
@@ -67,12 +71,12 @@ String command = "";
 
 long ultrasound_distance_1() {
    long duration, distance;
-   digitalWrite(12,LOW);
+   digitalWrite(TRIG,LOW);
    delayMicroseconds(2);
-   digitalWrite(12, HIGH);
+   digitalWrite(TRIG, HIGH);
    delayMicroseconds(10);
-   digitalWrite(12, LOW);
-   duration = pulseIn(14, HIGH);
+   digitalWrite(TRIG, LOW);
+   duration = pulseIn(ECHO, HIGH);
    distance = duration/58;
    return distance;
 }
