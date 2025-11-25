@@ -5,7 +5,7 @@
 #include <LittleFS.h> // LittleFS support
 #include <ESP8266mDNS.h> // mDNS support
 
-#define CONNECT_MODE 1 // 1 for station ... 2 for access point
+#define CONNECT_MODE 2 // 1 for station ... 2 for access point
 
 const char* ssid = "ssid"; // write your WiFi name
 const char* password = "password"; // write your WiFi password
@@ -21,28 +21,28 @@ const uint8_t LeftFootPin = D7; // D7 or 13
 const uint8_t RightFootPin = D3; // D3 or 0
 
 // Left Leg standing Position
-#define LA0 = 60    // 0 = Full Tilt Right   180 = Full Tilt Left   Default = 60 // was 60
+#define LA0 60    // 0 = Full Tilt Right   180 = Full Tilt Left   Default = 60 // was 60
 
 // Right Leg standing position
-#define RA0 = 120   // 0 = Full Tilt Right   180 = Full Tilt Left   Default = 120 // was 120
+#define RA0 120   // 0 = Full Tilt Right   180 = Full Tilt Left   Default = 120 // was 120
 
 // Left Leg tilt left walking position
-#define LATL = 100   // 0 = Full Tilt Right   180 = Full Tilt Left   Default BASIC = 85   Default HUMANOID = 80 // was 120
+#define LATL 100   // 0 = Full Tilt Right   180 = Full Tilt Left   Default BASIC = 85   Default HUMANOID = 80 // was 120
 
 // Right Leg tilt left walking position
-#define RATL = 175  // 0 = Full Tilt Right   180 = Full Tilt Left   Default BASIC = 175   Default HUMANOID = 150 // was 180
+#define RATL 175  // 0 = Full Tilt Right   180 = Full Tilt Left   Default BASIC = 175   Default HUMANOID = 150 // was 180
 
 // Left Leg tilt right walking position
-#define LATR = 5   // 0 = Full Tilt Right   180 = Full Tilt Left   Default BASIC = 5   Default HUMANOID = 30 // was 0
+#define LATR 5   // 0 = Full Tilt Right   180 = Full Tilt Left   Default BASIC = 5   Default HUMANOID = 30 // was 0
 
 // Right Leg tilt right walking position
-#define RATR = 80  // 0 = Full Tilt Right   180 = Full Tilt Left   Default BASIC = 95  Default HUMANOID = 100 // was 65
+#define RATR 80  // 0 = Full Tilt Right   180 = Full Tilt Left   Default BASIC = 95  Default HUMANOID = 100 // was 65
 
 // Left Leg roll Position
-#define LA1 = 180  // 0 = Full Tilt Right   180 = Full Tilt Left   Default = 170 // was 170
+#define LA1 180  // 0 = Full Tilt Right   180 = Full Tilt Left   Default = 170 // was 170
 
 // Right Leg roll position
-#define RA1 = 0    // 0 = Full Tilt Right   180 = Full Tilt Left   Default = 10 // was 10
+#define RA1 0    // 0 = Full Tilt Right   180 = Full Tilt Left   Default = 10 // was 10
 
 
 // Creamos una instancia del servidor
