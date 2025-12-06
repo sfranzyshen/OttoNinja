@@ -110,7 +110,7 @@ void Home() {
   RightFoot.write(90);
   LeftLeg.write(LA0); 
   RightLeg.write(RA0);
-  delay(100);
+  delay(300);
   LeftLeg.detach();
   RightLeg.detach();
 }
@@ -122,7 +122,7 @@ void SetWalk() {
   RightLeg.attach(RightLegPin, 544, 2400);
   LeftLeg.write(LA0);
   RightLeg.write(RA0);
-  delay(100);
+  delay(300);
   LeftLeg.detach();
   RightLeg.detach();
   delay(100);
@@ -135,7 +135,7 @@ void SetRoll() {
   RightLeg.attach(RightLegPin, 544, 2400);
   LeftLeg.write(LA1);  // was 170
   RightLeg.write(RA1); // was 10
-  delay(100);
+  delay(300);
   LeftLeg.detach();
   RightLeg.detach();
   delay(100);
@@ -423,6 +423,7 @@ void setup() {
 
   tone(5, 440, 1000);
   Home();
+  SetWalk(); // default to walk mode
 }
 
 void loop() {
