@@ -71,7 +71,7 @@ String command = "";
 
 long ultrasound_distance_1() {
    long duration, distance;
-   digitalWrite(TRIG,LOW);
+   digitalWrite(TRIG, LOW);
    delayMicroseconds(2);
    digitalWrite(TRIG, HIGH);
    delayMicroseconds(10);
@@ -606,7 +606,6 @@ void CheckClient() {
     client.stop();
     return;
   }
-;
   
   client.flush();
 
