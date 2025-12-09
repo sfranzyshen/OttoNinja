@@ -9,23 +9,25 @@
 
 #define CONNECT_MODE 2 // 1 for station ... 2 for access point
 
-const char* ssid = "ssid"; // write your WiFi name
-const char* password = "password"; // write your WiFi password
+const char* ssid = "ottoninja"; // write your WiFi name
+const char* password = "ottoninja"; // write your WiFi password
 const char* esp_hostname = "ottoninja"; // Desired hostname
 
 IPAddress ap_ip(192,168,1,1);     
 IPAddress ap_gateway(192,168,1,1);   
 IPAddress ap_subnet(255,255,255,0); 
 
-// Pins
-const uint8_t LeftLegPin = D8; // D8 or 15
-const uint8_t RightLegPin = D4; // D4 or 2
-const uint8_t LeftFootPin = D7; // D7 or 13
-const uint8_t RightFootPin = D3; // D3 or 0
+// leg & foot Pins
+const uint8_t LeftLegPin = D8; // D8 or gpio 15
+const uint8_t RightLegPin = D4; // D4 or gpio 2
+const uint8_t LeftFootPin = D7; // D7 or gpio 13
+const uint8_t RightFootPin = D3; // D3 or gpio 0
 
-// Ultrasound options
-#define ECHO D6
-#define TRIG D5
+// Ultrasound & Buzzer options
+#define ECHO D6 // gpio 12
+#define TRIG D5 // gpio 14
+#define DIST 15 // distance in centimeters (cm)
+#define BUZZER D1  // gpio 5
 
 // Left Leg standing Position
 #define LA0 60    // 0 = Full Tilt Right   180 = Full Tilt Left   Default = 60 // was 60
@@ -68,8 +70,8 @@ int roll_right_backward_speed = 40;
 int roll_left_backward_speed = 40;
 String command = "";
 
-
-long ultrasound_distance_1() {
+// ultrasound_distance centimeters (cm)
+long ultrasound_distance() {
    long duration, distance;
    digitalWrite(TRIG, LOW);
    delayMicroseconds(2);
@@ -78,11 +80,13 @@ long ultrasound_distance_1() {
    digitalWrite(TRIG, LOW);
    duration = pulseIn(ECHO, HIGH);
    distance = duration/58;
+   Serial.print("Distance (cm): ");
+   Serial.println(distance);
    return distance;
 }
 
 void AvoidanceWalk() {
-  if (ultrasound_distance_1() <= 15) {
+  if (ultrasound_distance() <= DIST) {
     Home();
     delay(50);
     WalkRight();
@@ -91,7 +95,7 @@ void AvoidanceWalk() {
 }
 
 void AvoidanceRoll() {
-  if (ultrasound_distance_1() <= 15) {
+  if (ultrasound_distance() <= DIST) {
     NinjaRollStop();
     NinjaRollRight(roll_right_forward_speed, roll_left_forward_speed);
   }
@@ -357,7 +361,11 @@ void decodeSpeeds(String c) {
 void setup() {
   Serial.begin(115200);
   delay(10);  
-  pinMode(5, OUTPUT);
+
+  pinMode(BUZZER, OUTPUT); // Sets the buzzer pin as an Output
+  pinMode(TRIG, OUTPUT); // Sets the trig Pin as an Output
+  pinMode(ECHO, INPUT); // Sets the echo Pin as an Input
+  
   // Imprimimos la información sobre la red WiFi.
   Serial.println();
   Serial.println();
@@ -421,7 +429,7 @@ void setup() {
   }
   Serial.println("LittleFS mounted successfully");
 
-  tone(5, 440, 1000);
+  tone(BUZZER, 440, 1000);
   Home();
   SetWalk(); // default to walk mode
 }
@@ -479,9 +487,15 @@ void loop() {
     NinjaRollStop();
   }
   else if (command == "avoidancewalk") {
+    if(rollMode) {
+      SetWalk();
+    }
     AvoidanceWalk();
   }
   else if (command == "avoidanceroll") {
+    if(walkMode) {
+      SetRoll();
+    }
     AvoidanceRoll();
   }
 
