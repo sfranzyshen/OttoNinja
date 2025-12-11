@@ -96,10 +96,17 @@ void AvoidanceWalk() {
 
 void AvoidanceRoll() {
   if (ultrasound_distance() <= DIST) {
+    NinjaRollBackward(roll_right_backward_speed, roll_left_backward_speed);
+    delay(500);
     NinjaRollStop();
+    delay(100);
     NinjaRollRight(roll_right_forward_speed, roll_left_forward_speed);
+    delay(500);
+    NinjaRollStop();
+    delay(100);
   }
   NinjaRollForward(roll_right_forward_speed, roll_left_forward_speed);
+  delay(100);
 }
 
 void Home() {
