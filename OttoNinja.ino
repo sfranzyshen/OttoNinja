@@ -106,7 +106,7 @@ void AvoidanceRoll() {
     delay(100);
   }
   NinjaRollForward(roll_right_forward_speed, roll_left_forward_speed);
-  delay(100);
+  //delay(100);
 }
 
 void Home() {
